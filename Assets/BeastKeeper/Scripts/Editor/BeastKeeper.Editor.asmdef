@@ -1,0 +1,22 @@
+{
+    "name": "BeastKeeper.Editor",
+    "rootNamespace": "BeastKeeper.Editor",
+    "references": [
+        "BeastKeeper.Core",
+        "BeastKeeper.Data",
+        "BeastKeeper.Systems",
+        "BeastKeeper.Gameplay",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

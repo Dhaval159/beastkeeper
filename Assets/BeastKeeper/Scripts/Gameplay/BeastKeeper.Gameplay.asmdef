@@ -1,0 +1,19 @@
+{
+    "name": "BeastKeeper.Gameplay",
+    "rootNamespace": "BeastKeeper.Gameplay",
+    "references": [
+        "BeastKeeper.Core",
+        "BeastKeeper.Data",
+        "BeastKeeper.Systems",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
