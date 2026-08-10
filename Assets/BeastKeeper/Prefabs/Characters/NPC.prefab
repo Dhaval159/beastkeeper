@@ -152,5 +152,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37da354f2adb06a4ab8e2ab8ed1e2dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BeastKeeper.Gameplay::BeastKeeper.Gameplay.InteractableNPC
-  npcName: Old Keeper
-  interactionMessage: Hello, Beast Keeper. Be careful in the wild.
+  npcName: Npc
+  dialogueData: {fileID: 0}

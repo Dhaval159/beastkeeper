@@ -6,7 +6,9 @@
         "BeastKeeper.Data",
         "BeastKeeper.Systems",
         "BeastKeeper.Gameplay",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [
         "Editor"

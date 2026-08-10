@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using BeastKeeper.Core;
+using BeastKeeper.Systems;
 
 namespace BeastKeeper.Gameplay
 {
@@ -88,11 +90,21 @@ namespace BeastKeeper.Gameplay
 
         private void OnInteractStarted(InputAction.CallbackContext context)
         {
+            if (ServiceLocator.TryGet<IDialogueSystem>(out var dialogueSystem) && dialogueSystem.IsDialogueActive)
+            {
+                return;
+            }
             TryInteract();
         }
 
         private void FixedUpdate()
         {
+            if (ServiceLocator.TryGet<IDialogueSystem>(out var dialogueSystem) && dialogueSystem.IsDialogueActive)
+            {
+                rb.linearVelocity = Vector2.zero;
+                return;
+            }
+
             // Smooth physics-based movement using Rigidbody2D.linearVelocity
             rb.linearVelocity = moveInput * moveSpeed;
         }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db4f87bdbe838a4b8e2463ecd6d1332, type: 3}
+  m_Name: OldKeeperIntroDialogue
+  m_EditorClassIdentifier: BeastKeeper.Data::BeastKeeper.Data.DialogueData
+  id: old_keeper_intro
+  displayName: Old Keeper Intro
+  description: 
+  nodes:
+  - speakerName: Old Keeper
+    text: Ah, there you are.
+    choices: []
+  - speakerName: Old Keeper
+    text: I was beginning to wonder when you'd return.
+    choices: []
+  - speakerName: Old Keeper
+    text: Be careful beyond the village gates.
+    choices: []

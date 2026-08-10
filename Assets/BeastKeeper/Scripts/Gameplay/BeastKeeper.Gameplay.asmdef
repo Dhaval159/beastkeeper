@@ -5,7 +5,9 @@
         "BeastKeeper.Core",
         "BeastKeeper.Data",
         "BeastKeeper.Systems",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
