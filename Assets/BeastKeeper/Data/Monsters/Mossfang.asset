@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b435aaec7e43164982ce8d8da6579a6, type: 3}
+  m_Name: Mossfang
+  m_EditorClassIdentifier: BeastKeeper.Data::BeastKeeper.Data.MonsterData
+  id: mossfang
+  displayName: Mossfang
+  description: 
+  baseHp: 50
+  baseSpeed: 8
+  baseAttack: 12
+  baseDefense: 4
+  battleSprite: {fileID: 0}
+  overworldSprite: {fileID: 0}
+  learnableAbilities:
+  - {fileID: 11400000, guid: 43981538765f63244b2d737b03504233, type: 2}
+  - {fileID: 11400000, guid: d76169b7746c32841ae393c1dd0262e9, type: 2}

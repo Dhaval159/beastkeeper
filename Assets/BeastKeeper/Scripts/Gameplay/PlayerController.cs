@@ -19,15 +19,21 @@ namespace BeastKeeper.Gameplay
         [SerializeField] private float interactionRadius = 1.2f;
         [SerializeField] private LayerMask interactableLayer;
 
+        public enum FacingDirection { Down, Left, Right, Up }
+        private FacingDirection currentFacingDirection = FacingDirection.Down;
+        public FacingDirection CurrentFacingDirection => currentFacingDirection;
+
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Vector2 lastMoveDirection = Vector2.down;
         private PlayerInput playerInput;
+        private Animator animator;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             playerInput = GetComponent<PlayerInput>();
+            animator = GetComponent<Animator>();
             
             // Configure Rigidbody2D for top-down 2D physics
             rb.gravityScale = 0f;
@@ -107,6 +113,86 @@ namespace BeastKeeper.Gameplay
 
             // Smooth physics-based movement using Rigidbody2D.linearVelocity
             rb.linearVelocity = moveInput * moveSpeed;
+        }
+
+        private void Update()
+        {
+            UpdateAnimationState();
+        }
+
+        private void UpdateAnimationState()
+        {
+            if (animator == null) return;
+
+            bool isDialogueActive = ServiceLocator.TryGet<IDialogueSystem>(out var dialogueSystem) && dialogueSystem.IsDialogueActive;
+            
+            if (isDialogueActive)
+            {
+                PlayIdleAnimation();
+                return;
+            }
+
+            if (moveInput.sqrMagnitude > 0.01f)
+            {
+                // Determine facing direction based on dominant axis
+                float absX = Mathf.Abs(moveInput.x);
+                float absY = Mathf.Abs(moveInput.y);
+
+                if (absX > absY)
+                {
+                    currentFacingDirection = moveInput.x > 0 ? FacingDirection.Right : FacingDirection.Left;
+                    lastMoveDirection = moveInput.x > 0 ? Vector2.right : Vector2.left;
+                }
+                else
+                {
+                    currentFacingDirection = moveInput.y > 0 ? FacingDirection.Up : FacingDirection.Down;
+                    lastMoveDirection = moveInput.y > 0 ? Vector2.up : Vector2.down;
+                }
+
+                PlayWalkAnimation();
+            }
+            else
+            {
+                PlayIdleAnimation();
+            }
+        }
+
+        private void PlayWalkAnimation()
+        {
+            switch (currentFacingDirection)
+            {
+                case FacingDirection.Down:
+                    animator.Play("Walk_Down");
+                    break;
+                case FacingDirection.Left:
+                    animator.Play("Walk_Left");
+                    break;
+                case FacingDirection.Right:
+                    animator.Play("Walk_Right");
+                    break;
+                case FacingDirection.Up:
+                    animator.Play("Walk_Up");
+                    break;
+            }
+        }
+
+        private void PlayIdleAnimation()
+        {
+            switch (currentFacingDirection)
+            {
+                case FacingDirection.Down:
+                    animator.Play("Idle_Down");
+                    break;
+                case FacingDirection.Left:
+                    animator.Play("Idle_Left");
+                    break;
+                case FacingDirection.Right:
+                    animator.Play("Idle_Right");
+                    break;
+                case FacingDirection.Up:
+                    animator.Play("Idle_Up");
+                    break;
+            }
         }
 
         private void TryInteract()

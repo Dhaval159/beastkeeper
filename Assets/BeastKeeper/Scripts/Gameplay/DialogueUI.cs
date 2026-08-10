@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 using BeastKeeper.Core;
 using BeastKeeper.Systems;
@@ -81,9 +82,15 @@ namespace BeastKeeper.Gameplay
                 // But only if we are not currently displaying branching choices!
                 if (!hasChoices)
                 {
-                    if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+                    if (Keyboard.current != null)
                     {
-                        OnContinuePressed();
+                        if (Keyboard.current.eKey.wasPressedThisFrame || 
+                            Keyboard.current.spaceKey.wasPressedThisFrame || 
+                            Keyboard.current.enterKey.wasPressedThisFrame || 
+                            Keyboard.current.numpadEnterKey.wasPressedThisFrame)
+                        {
+                            OnContinuePressed();
+                        }
                     }
                 }
             }
