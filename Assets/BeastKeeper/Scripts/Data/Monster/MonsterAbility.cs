@@ -23,5 +23,21 @@ namespace BeastKeeper.Data
         public int EnergyCost => energyCost;
         public AbilityEffectType EffectType => effectType;
         public int EffectValue => effectValue;
+
+        /// <summary>
+        /// Creates an in-memory MonsterAbility for runtime fallback or testing without touching Unity Editor serialization.
+        /// </summary>
+        public static MonsterAbility CreateRuntime(string id, string displayName, int basePower, int energyCost, AbilityEffectType effectType, int effectValue = 0)
+        {
+            var ability = CreateInstance<MonsterAbility>();
+            ability.name = displayName;
+            ability.id = id;
+            ability.displayName = displayName;
+            ability.basePower = Mathf.Max(0, basePower);
+            ability.energyCost = Mathf.Max(0, energyCost);
+            ability.effectType = effectType;
+            ability.effectValue = effectValue;
+            return ability;
+        }
     }
 }

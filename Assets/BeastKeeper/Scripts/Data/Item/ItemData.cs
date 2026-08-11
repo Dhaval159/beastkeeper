@@ -23,5 +23,19 @@ namespace BeastKeeper.Data
         public ItemType Type => type;
         public Sprite Icon => icon;
         public int Value => value;
+
+        /// <summary>
+        /// Creates an in-memory ItemData for runtime fallback or testing without touching Unity Editor serialization.
+        /// </summary>
+        public static ItemData CreateRuntime(string id, string displayName, ItemType type, int value)
+        {
+            var item = CreateInstance<ItemData>();
+            item.name = displayName;
+            item.id = id;
+            item.displayName = displayName;
+            item.type = type;
+            item.value = value;
+            return item;
+        }
     }
 }

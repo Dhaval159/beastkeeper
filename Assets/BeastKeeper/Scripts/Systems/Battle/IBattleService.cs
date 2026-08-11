@@ -9,9 +9,10 @@ namespace BeastKeeper.Systems
     public interface IBattleService : IGameService
     {
         MonsterData ActiveEnemyData { get; }
+        int ActiveEnemyLevel { get; }
         bool IsBattleActive { get; }
         
-        void TriggerBattle(MonsterData enemyData);
+        void TriggerBattle(MonsterData enemyData, int level = 1);
         void EndBattle(bool playerWon);
     }
 }

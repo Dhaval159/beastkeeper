@@ -30,5 +30,29 @@ namespace BeastKeeper.Data
         public Sprite BattleSprite => battleSprite;
         public Sprite OverworldSprite => overworldSprite;
         public IReadOnlyList<MonsterAbility> LearnableAbilities => learnableAbilities;
+
+        /// <summary>
+        /// Creates an in-memory MonsterData for runtime fallback or testing without touching Unity Editor serialization.
+        /// </summary>
+        public static MonsterData CreateRuntime(string id, string displayName, int baseHp, int baseSpeed, int baseAttack, int baseDefense, params MonsterAbility[] abilities)
+        {
+            var data = CreateInstance<MonsterData>();
+            data.name = displayName;
+            data.id = id;
+            data.displayName = displayName;
+            data.baseHp = Mathf.Max(0, baseHp);
+            data.baseSpeed = Mathf.Max(0, baseSpeed);
+            data.baseAttack = Mathf.Max(0, baseAttack);
+            data.baseDefense = Mathf.Max(0, baseDefense);
+            data.learnableAbilities = new List<MonsterAbility>();
+            if (abilities != null)
+            {
+                foreach (var ability in abilities)
+                {
+                    if (ability != null) data.learnableAbilities.Add(ability);
+                }
+            }
+            return data;
+        }
     }
 }

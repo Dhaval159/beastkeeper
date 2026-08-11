@@ -50,7 +50,7 @@ namespace BeastKeeper.Gameplay.Battle
             if (itemButton != null)
             {
                 itemButton.onClick.RemoveAllListeners();
-                itemButton.onClick.AddListener(OnItemClicked);
+                itemButton.onClick.AddListener(controller.OnPlayerItem);
             }
             if (runButton != null)
             {
@@ -95,11 +95,6 @@ namespace BeastKeeper.Gameplay.Battle
                 logText.text = message;
             }
             Debug.Log($"[BattleLog] {message}");
-        }
-
-        private void OnItemClicked()
-        {
-            LogMessage("Items are not available yet!");
         }
     }
 }

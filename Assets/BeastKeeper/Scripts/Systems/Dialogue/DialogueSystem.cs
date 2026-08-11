@@ -82,11 +82,17 @@ namespace BeastKeeper.Systems
         {
             if (!isActive) return;
 
+            string dialogueId = currentDialogue != null ? currentDialogue.IdOrAssetName : string.Empty;
+
             isActive = false;
             currentDialogue = null;
             currentNodeIndex = -1;
 
             OnDialogueEnded?.Invoke();
+            if (!string.IsNullOrEmpty(dialogueId))
+            {
+                EventBus.Raise(new DialogueCompletedEvent { DialogueId = dialogueId });
+            }
         }
 
         private void AdvanceDialogue()
