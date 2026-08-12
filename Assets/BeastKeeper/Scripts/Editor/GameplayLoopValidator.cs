@@ -58,7 +58,7 @@ namespace BeastKeeper.Editor
 
             string report = BuildReport();
             Debug.Log($"[GameplayLoopValidator]\n{report}");
-            EditorUtility.DisplayDialog("Beast Keeper - Gameplay Loop Validation", report, "OK");
+            // EditorUtility.DisplayDialog("Beast Keeper - Gameplay Loop Validation", report, "OK");
         }
 
         private static void ValidateScenes()

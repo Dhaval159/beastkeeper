@@ -127,8 +127,7 @@ namespace BeastKeeper.Data
         {
             var quest = CreateInstance<QuestData>();
             quest.name = displayName;
-            quest.id = id;
-            quest.displayName = displayName;
+            quest.InitializeBase(id, displayName);
             quest.experienceReward = Mathf.Max(0, experienceReward);
             quest.startAfterDialogueId = startAfterDialogueId;
             quest.startObjectiveId = startObjectiveId;

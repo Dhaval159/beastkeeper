@@ -38,8 +38,7 @@ namespace BeastKeeper.Data
         {
             var data = CreateInstance<MonsterData>();
             data.name = displayName;
-            data.id = id;
-            data.displayName = displayName;
+            data.InitializeBase(id, displayName);
             data.baseHp = Mathf.Max(0, baseHp);
             data.baseSpeed = Mathf.Max(0, baseSpeed);
             data.baseAttack = Mathf.Max(0, baseAttack);

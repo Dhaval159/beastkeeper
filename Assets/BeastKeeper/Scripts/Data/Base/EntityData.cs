@@ -35,5 +35,14 @@ namespace BeastKeeper.Data
         /// Localized or raw description.
         /// </summary>
         public string Description => description;
+
+        /// <summary>
+        /// Protected initialization method for derived runtime creation.
+        /// </summary>
+        protected void InitializeBase(string id, string displayName)
+        {
+            this.id = id;
+            this.displayName = displayName;
+        }
     }
 }

@@ -19,8 +19,8 @@ MonoBehaviour:
   baseSpeed: 8
   baseAttack: 12
   baseDefense: 4
-  battleSprite: {fileID: 0}
-  overworldSprite: {fileID: 0}
+  battleSprite: {fileID: 9012664519691173759, guid: 993170360a514c244b4b1baf5595021f, type: 3}
+  overworldSprite: {fileID: -9216318197454445968, guid: 05ebe23a0119f28488de7eeff86736e8, type: 3}
   learnableAbilities:
   - {fileID: 11400000, guid: 43981538765f63244b2d737b03504233, type: 2}
   - {fileID: 11400000, guid: d76169b7746c32841ae393c1dd0262e9, type: 2}

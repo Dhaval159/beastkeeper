@@ -313,7 +313,7 @@ namespace BeastKeeper.Tests.EditMode
             Assert.That(BattleKeyboardInput.KeyToAction(Key.Digit2), Is.EqualTo(BattleAction.Observe));
             Assert.That(BattleKeyboardInput.KeyToAction(Key.Digit3), Is.EqualTo(BattleAction.Item));
             Assert.That(BattleKeyboardInput.KeyToAction(Key.Digit4), Is.EqualTo(BattleAction.Run));
-            Assert.That(BattleKeyboardInput.KeyToAction(Key.AlphaA), Is.EqualTo(BattleAction.None));
+            Assert.That(BattleKeyboardInput.KeyToAction(Key.A), Is.EqualTo(BattleAction.None));
         }
 
         [Test]
@@ -417,12 +417,12 @@ namespace BeastKeeper.Tests.EditMode
                 EventSystem second = BattleEventSystemBootstrapper.EnsureEventSystem(parent);
                 Assert.That(second, Is.SameAs(first));
 
-                EventSystem[] all = Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None);
+                EventSystem[] all = UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None);
                 Assert.That(all.Length, Is.EqualTo(1));
             }
             finally
             {
-                Object.DestroyImmediate(parent.gameObject);
+                UnityEngine.Object.DestroyImmediate(parent.gameObject);
             }
         }
 

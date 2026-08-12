@@ -152,5 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37da354f2adb06a4ab8e2ab8ed1e2dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: BeastKeeper.Gameplay::BeastKeeper.Gameplay.InteractableNPC
-  npcName: Npc
-  dialogueData: {fileID: 0}
+  npcName: Old Keeper
+  npcId: old_keeper
+  dialogueData: {fileID: 11400000, guid: 0b3589b2efd275048a0389f6f4764465, type: 2}

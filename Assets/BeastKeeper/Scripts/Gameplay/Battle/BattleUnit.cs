@@ -23,6 +23,7 @@ namespace BeastKeeper.Gameplay.Battle
         public int Defense { get; set; }
         public int Speed { get; set; }
         public bool IsPlayer { get; set; }
+        public Sprite BattleSprite { get; set; }
         public List<MonsterAbility> Abilities { get; set; } = new List<MonsterAbility>();
 
         public bool IsDefeated => CurrentHp <= 0;
@@ -55,7 +56,8 @@ namespace BeastKeeper.Gameplay.Battle
                 Attack = baseAttack,
                 Defense = data.BaseDefense + (lvl - 1) * StatPerLevel,
                 Speed = data.BaseSpeed + (lvl - 1) * SpeedPerLevel,
-                IsPlayer = false
+                IsPlayer = false,
+                BattleSprite = data.BattleSprite
             };
 
             if (data.LearnableAbilities != null)

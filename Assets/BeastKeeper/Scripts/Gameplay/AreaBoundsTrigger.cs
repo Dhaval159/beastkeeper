@@ -21,6 +21,14 @@ namespace BeastKeeper.Gameplay
         /// </summary>
         public string AreaId => string.IsNullOrEmpty(areaId) ? areaName : areaId;
 
+        public void Configure(string name, string id, Vector2 min, Vector2 max)
+        {
+            areaName = name;
+            areaId = id;
+            minBounds = min;
+            maxBounds = max;
+        }
+
         private void Start()
         {
             // Ensure collider is set to IsTrigger

@@ -43,7 +43,7 @@ namespace BeastKeeper.Gameplay
             }
             log.AppendLine("Test 1: Player found in exploration scene.");
 
-            Teleport(player, new Vector3(0f, 21f, 0f));
+            Teleport(player, new Vector3(0f, 26f, 0f));
             log.AppendLine("Test 2: Teleported player to EncounterZone.");
 
             yield return WaitForScene(BattleService.BattleSceneName, 8f);
@@ -152,7 +152,7 @@ namespace BeastKeeper.Gameplay
             }
             log.AppendLine("Test 13: Camera bounds verified active.");
 
-            if (player != null) Teleport(player, new Vector3(0f, 21f, 0f));
+            if (player != null) Teleport(player, new Vector3(0f, 26f, 0f));
             yield return WaitForScene(BattleService.BattleSceneName, 8f);
             if (SceneManager.GetActiveScene().name != BattleService.BattleSceneName)
             {

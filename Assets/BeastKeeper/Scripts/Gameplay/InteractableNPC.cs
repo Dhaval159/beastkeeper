@@ -18,6 +18,13 @@ namespace BeastKeeper.Gameplay
 
         public DialogueData DialogueData => dialogueData;
 
+        public void Configure(string id, string name, DialogueData dialogue)
+        {
+            npcId = id;
+            npcName = name;
+            dialogueData = dialogue;
+        }
+
         /// <summary>
         /// Stable id used for quest objectives ("talk:&lt;npcId&gt;"). Falls back to the name.
         /// </summary>

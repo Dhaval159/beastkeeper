@@ -31,8 +31,7 @@ namespace BeastKeeper.Data
         {
             var item = CreateInstance<ItemData>();
             item.name = displayName;
-            item.id = id;
-            item.displayName = displayName;
+            item.InitializeBase(id, displayName);
             item.type = type;
             item.value = value;
             return item;

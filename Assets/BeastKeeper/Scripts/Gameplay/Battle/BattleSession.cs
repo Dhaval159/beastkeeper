@@ -35,6 +35,7 @@ namespace BeastKeeper.Gameplay.Battle
         private const float EnemyAiAttackAdvantageThreshold = 5f;
 
         public event Action<string> Log;
+        private void LogMessage(string msg) { Log?.Invoke(msg); }
         public event Action StateChanged;
 
         public BattleUnit PlayerUnit { get; private set; }
@@ -113,7 +114,7 @@ namespace BeastKeeper.Gameplay.Battle
                 case BattleAction.Observe: PlayerObserve(); break;
                 case BattleAction.Item: PlayerItem(); break;
                 case BattleAction.Run: PlayerRun(); break;
-                default: Log("Unknown action."); break;
+                default: LogMessage("Unknown action."); break;
             }
         }
 
@@ -130,8 +131,8 @@ namespace BeastKeeper.Gameplay.Battle
 
             int damage = BattleDamageCalculator.CalculateDamage(PlayerUnit, ability, EnemyUnit);
             EnemyUnit.ApplyDamage(damage);
-            Log($"{PlayerUnit.Name} used {(ability != null ? ability.DisplayNameOrAssetName : "a basic strike")}!");
-            Log($"{EnemyUnit.Name} took {damage} damage.");
+            LogMessage($"{PlayerUnit.Name} used {(ability != null ? ability.DisplayNameOrAssetName : "a basic strike")}!");
+            LogMessage($"{EnemyUnit.Name} took {damage} damage.");
             RaiseStateChanged();
 
             if (EnemyUnit.IsDefeated)
@@ -151,7 +152,7 @@ namespace BeastKeeper.Gameplay.Battle
 
             ActionInProgress = true;
             var enemy = EnemyUnit;
-            Log($"{enemy.Name} (Lv.{enemy.Level}) - HP: {enemy.CurrentHp}/{enemy.MaxHp} | ATK: {enemy.Attack} | DEF: {enemy.Defense} | SPD: {enemy.Speed}");
+            LogMessage($"{enemy.Name} (Lv.{enemy.Level}) - HP: {enemy.CurrentHp}/{enemy.MaxHp} | ATK: {enemy.Attack} | DEF: {enemy.Defense} | SPD: {enemy.Speed}");
             AdvanceAfterPlayerAction();
             ActionInProgress = false;
         }
@@ -162,14 +163,14 @@ namespace BeastKeeper.Gameplay.Battle
 
             if (potionItem == null || PotionCount <= 0)
             {
-                Log("No usable items.");
+                LogMessage("No usable items.");
                 return;
             }
 
             ActionInProgress = true;
             int healed = PlayerUnit.Heal(potionItem.Value);
             PotionCount--;
-            Log($"Used {potionItem.DisplayNameOrAssetName}! Recovered {healed} HP.");
+            LogMessage($"Used {potionItem.DisplayNameOrAssetName}! Recovered {healed} HP.");
             RaiseStateChanged();
             AdvanceAfterPlayerAction();
             ActionInProgress = false;
@@ -189,7 +190,7 @@ namespace BeastKeeper.Gameplay.Battle
                 return;
             }
 
-            Log("Couldn't escape!");
+            LogMessage("Couldn't escape!");
             AdvanceAfterPlayerAction();
             ActionInProgress = false;
         }
@@ -208,15 +209,15 @@ namespace BeastKeeper.Gameplay.Battle
             {
                 int reduction = Mathf.Max(1, ability.EffectValue);
                 PlayerUnit.Attack = Mathf.Max(1, PlayerUnit.Attack - reduction);
-                Log($"{EnemyUnit.Name} used {ability.DisplayNameOrAssetName}!");
-                Log($"{PlayerUnit.Name}'s Attack fell by {reduction}!");
+                LogMessage($"{EnemyUnit.Name} used {ability.DisplayNameOrAssetName}!");
+                LogMessage($"{PlayerUnit.Name}'s Attack fell by {reduction}!");
             }
             else
             {
                 int damage = BattleDamageCalculator.CalculateDamage(EnemyUnit, ability, PlayerUnit);
                 PlayerUnit.ApplyDamage(damage);
-                Log($"{EnemyUnit.Name} used {(ability != null ? ability.DisplayNameOrAssetName : "a basic strike")}!");
-                Log($"{PlayerUnit.Name} took {damage} damage.");
+                LogMessage($"{EnemyUnit.Name} used {(ability != null ? ability.DisplayNameOrAssetName : "a basic strike")}!");
+                LogMessage($"{PlayerUnit.Name} took {damage} damage.");
             }
 
             RaiseStateChanged();
@@ -295,19 +296,19 @@ namespace BeastKeeper.Gameplay.Battle
                 case BattleState.Victory:
                     IsBattleEnded = true;
                     PlayerWon = true;
-                    Log($"{EnemyUnit.Name} defeated!");
+                    LogMessage($"{EnemyUnit.Name} defeated!");
                     AwardVictoryRewards();
                     break;
                 case BattleState.Defeat:
                     IsBattleEnded = true;
                     PlayerWon = false;
-                    Log("You were defeated...");
+                    LogMessage("You were defeated...");
                     EventBus.Raise(new BattleDefeatEvent { EnemyId = EnemyUnit.DataId, EnemyLevel = EnemyUnit.Level });
                     break;
                 case BattleState.Escape:
                     IsBattleEnded = true;
                     PlayerWon = true;
-                    Log("Escaped safely!");
+                    LogMessage("Escaped safely!");
                     break;
             }
 
@@ -324,7 +325,7 @@ namespace BeastKeeper.Gameplay.Battle
             victoryRewardsAwarded = true;
 
             int xp = Mathf.Max(1, EnemyUnit.Level) * VictoryXpPerEnemyLevel;
-            Log($"+{xp} XP");
+            LogMessage($"+{xp} XP");
 
             EventBus.Raise(new MonsterDefeatedEvent { MonsterId = EnemyUnit.DataId, Level = EnemyUnit.Level });
             EventBus.Raise(new BattleVictoryEvent

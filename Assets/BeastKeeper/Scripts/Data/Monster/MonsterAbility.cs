@@ -31,8 +31,7 @@ namespace BeastKeeper.Data
         {
             var ability = CreateInstance<MonsterAbility>();
             ability.name = displayName;
-            ability.id = id;
-            ability.displayName = displayName;
+            ability.InitializeBase(id, displayName);
             ability.basePower = Mathf.Max(0, basePower);
             ability.energyCost = Mathf.Max(0, energyCost);
             ability.effectType = effectType;

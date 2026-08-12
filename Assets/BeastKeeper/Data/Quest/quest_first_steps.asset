@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98e1b98a67c40b478a21ab49d12823d, type: 3}
+  m_Name: quest_first_steps
+  m_EditorClassIdentifier: BeastKeeper.Data::BeastKeeper.Data.QuestData
+  id: quest_first_steps
+  displayName: First Steps
+  description: Speak with the Old Keeper, explore the forest, and defeat a Mossfang.
+  objectives:
+  - id: talk:old_keeper
+    description: Talk to the Old Keeper.
+    required: 1
+    requiresObjectiveId: 
+  - id: enter:forest
+    description: Enter the forest.
+    required: 1
+    requiresObjectiveId: talk:old_keeper
+  - id: defeat:mossfang
+    description: Defeat a Mossfang.
+    required: 1
+    requiresObjectiveId: enter:forest
+  - id: talk:old_keeper:return
+    description: Return to the Old Keeper.
+    required: 1
+    requiresObjectiveId: defeat:mossfang
+  experienceReward: 50
+  itemRewards:
+  - item: {fileID: 11400000, guid: 500c35e88a880c6429778e7ed315e62e, type: 2}
+    quantity: 1
+  startAfterDialogueId: old_keeper_intro
+  startObjectiveId: talk:old_keeper

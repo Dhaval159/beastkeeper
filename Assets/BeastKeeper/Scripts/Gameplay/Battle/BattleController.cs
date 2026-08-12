@@ -14,11 +14,13 @@ namespace BeastKeeper.Gameplay.Battle
     {
         [SerializeField] private BattleUI battleUI;
         [SerializeField] private MonsterData playerMonsterData;
+        [SerializeField] private SpriteRenderer enemySpriteRenderer;
+        [SerializeField] private SpriteRenderer playerSpriteRenderer;
 
         [Header("Flow Timing")]
-        [SerializeField] private float startSequenceDelay = 1.5f;
-        [SerializeField] private float enemyThinkDelay = 1.2f;
-        [SerializeField] private float actionPacingDelay = 1.0f;
+        [SerializeField] private float startSequenceDelay = 0.2f;
+        [SerializeField] private float enemyThinkDelay = 0.3f;
+        [SerializeField] private float actionPacingDelay = 0.3f;
         [SerializeField] private float endSequenceTimeout = 5f;
 
         private BattleSession session;
@@ -63,6 +65,31 @@ namespace BeastKeeper.Gameplay.Battle
             BattleUnit enemyUnit = BattleUnit.FromMonsterData(enemyData, Mathf.Max(1, battleService.ActiveEnemyLevel));
 
             session.Initialize(playerUnit, enemyUnit);
+
+            if (battleUI != null)
+            {
+                battleUI.SetupUI(this);
+            }
+
+            UpdateCombatantSprites();
+            StartCoroutine(BattleStartSequence());
+        }
+
+        private void UpdateCombatantSprites()
+        {
+            if (session == null) return;
+
+            var enemySr = enemySpriteRenderer != null ? enemySpriteRenderer : GameObject.Find("EnemyBeast")?.GetComponent<SpriteRenderer>();
+            if (enemySr != null && session.EnemyUnit != null && session.EnemyUnit.BattleSprite != null)
+            {
+                enemySr.sprite = session.EnemyUnit.BattleSprite;
+            }
+
+            var playerSr = playerSpriteRenderer != null ? playerSpriteRenderer : GameObject.Find("PlayerBeast")?.GetComponent<SpriteRenderer>();
+            if (playerSr != null && session.PlayerUnit != null && session.PlayerUnit.BattleSprite != null)
+            {
+                playerSr.sprite = session.PlayerUnit.BattleSprite;
+            }
         }
 
         private static MonsterData CreateFallbackEnemyData()
@@ -75,7 +102,7 @@ namespace BeastKeeper.Gameplay.Battle
         private static MonsterData CreateFallbackPlayerData()
         {
             var bite = MonsterAbility.CreateRuntime("bite", "Bite", 15, 0, AbilityEffectType.Damage);
-            return MonsterData.CreateRuntime("companion", "Companion", 50, 10, 15, 5, bite);
+            return MonsterData.CreateRuntime("temp_test_beast", "TEMPORARY TEST BEAST", 55, 9, 14, 6, bite);
         }
 
         private IEnumerator BattleStartSequence()

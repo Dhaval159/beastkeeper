@@ -1,7 +1,8 @@
 ﻿<Solution>
   <Project Path="BeastKeeper.Gameplay.csproj" />
   <Project Path="BeastKeeper.Data.csproj" />
+  <Project Path="BeastKeeper.Editor.csproj" />
   <Project Path="BeastKeeper.Systems.csproj" />
   <Project Path="BeastKeeper.Core.csproj" />
-  <Project Path="BeastKeeper.Editor.csproj" />
+  <Project Path="BeastKeeper.Tests.EditMode.csproj" />
 </Solution>
